@@ -1,3 +1,5 @@
+@import './coolors.scss';
+
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +8,44 @@
 }
 
 body {
-  background-color: gray;
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  background-color: $white;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: grid;
+  place-content: center;
+  gap: 10px;
+
+  div {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    input[type="radio"] {
+      cursor: pointer;
+    }
+  }
+
+  textarea {
+    display: block;
+    resize: none;
+  }
+
+  input[type="submit"], button {
+    cursor: pointer;
+    padding: 10px 20px;
+    color: white;
+    background-color: $darkLilac;
+    border: none;
+    border-radius: 5px;
+  }
 }
 
 @import './loader.scss';
