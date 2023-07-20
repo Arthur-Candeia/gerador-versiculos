@@ -33,9 +33,25 @@ form {
     }
   }
 
-  textarea {
+  #show {
     display: block;
-    resize: none;
+    cursor: default;
+    word-wrap: break-word;
+    min-width: 280px;
+    width: 100vw;
+    max-width: 700px;
+    min-height: 170px;
+    padding: 5px 20px;
+    text-align: justify;
+    font-weight: bolder;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+
+    span {
+      display: block;
+      text-align: right;
+    }
   }
 
   input[type="submit"], button {
