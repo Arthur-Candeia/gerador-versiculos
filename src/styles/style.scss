@@ -34,11 +34,12 @@ form {
   }
 
   #show {
+    position: relative;
     display: block;
     cursor: default;
     word-wrap: break-word;
     min-width: 280px;
-    width: 100vw;
+    width: 90vw;
     max-width: 700px;
     min-height: 170px;
     padding: 5px 20px;

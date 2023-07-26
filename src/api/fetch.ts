@@ -7,9 +7,12 @@ interface data {
 }
 
 export default async function fetchAPI(version: string): Promise<data> {
+  const header = {
+    Authorization: import.meta.env.VITE_TOKEN
+  }
   const result = await fetch(`https://www.abibliadigital.com.br/api/verses/${version}/random`, {headers: header})
   const data = await result.json()
-  console.log(data)
+  
   const name = data.book.name
   const chapter = data.chapter
   const number = data.number
@@ -20,9 +23,12 @@ export default async function fetchAPI(version: string): Promise<data> {
 }
 
 export async function fetchSwitchVersion(abbrev: string, chapter: number, number: number, version: string) {
+  const header = {
+    Authorization: import.meta.env.VITE_TOKEN
+  }
+
   const result = await fetch(`https://www.abibliadigital.com.br/api/verses/${version}/${abbrev}/${chapter}/${number}`, {headers: header})
   const data = await result.json()
-  console.log(data)
   const text: string = data.text
   return text
 }

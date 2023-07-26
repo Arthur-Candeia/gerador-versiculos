@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react"
 import fetchAPI, {fetchSwitchVersion} from "./api/fetch"
+import copyButton from "./copyButton"
 
 function App() {
 
@@ -11,8 +12,11 @@ function App() {
   const [text, setText] = useState('')
   const [abbrev, setAbbrev] = useState('')
   const [requests, setRequests] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [copy, setCopy] = useState('COPIAR')
 
   useEffect(() => {
+    setLoading(true)
     fetchAPI(version).then((result) => {
         const {name, chapter, number, text, abbrev} = result
         setName(name)
@@ -20,18 +24,32 @@ function App() {
         setNumber(number)
         setText(text)
         setAbbrev(abbrev)
+        setLoading(false)
     })
   }, [requests])
 
   function handleSubmit(ev: React.FormEvent) {
     ev.preventDefault()
+    setCopy('COPIAR')
+    copyButton()
     setRequests((counter) => counter+=1)
-    console.log(requests)
   }
 
   function switchVersion(newVersion: string) {
     setVersion(newVersion)
-    fetchSwitchVersion(abbrev, chapter, number, newVersion).then((result) => setText(result)) 
+    setCopy('COPIAR')
+    copyButton()
+    setLoading(true)
+    fetchSwitchVersion(abbrev, chapter, number, newVersion).then((result) => setText(result))
+    setLoading(false)
+  }
+
+  function copyToClipboard() {
+    setCopy('COPIADO')
+    copyButton('yes')
+    navigator.clipboard.writeText(`${text}
+
+${name} ${chapter}:${number}`)
   }
 
   return (
@@ -50,15 +68,17 @@ function App() {
           </span>
         </div>
         <div id="show">
-          <p>{text}</p>
-          <span>{`${name} ${chapter}:${number}`}</span>
+          {!loading ? (
+            <>
+              <p>{text}</p>
+              <span>{`${name} ${chapter}:${number}`}</span>
+            </>
+          ): <span className="loader" style={{display: 'inline-block'}}></span>}
         </div>
         <div id="buttons">
           <input type="submit" value="GERAR" />
-          <button type="button">COPIAR</button>
+          <button type="button" id="copy" onClick={copyToClipboard}>{copy}</button>
         </div>
-        <span className="loader" style={{display: 'none'}}></span>
-        {/* https://www.abibliadigital.com.br/ */}
       </form>
     </>
   )
