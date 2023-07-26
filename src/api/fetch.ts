@@ -6,9 +6,11 @@ interface data {
   abbrev: string
 }
 
+const VITE_TOKEN = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlRodSBKdWwgMjAgMjAyMyAxNjo0ODo1OSBHTVQrMDAwMC42NGI4MWMwZmJkMTI5YzAwMjAxYTM1MjUiLCJpYXQiOjE2ODk4NzE3Mzl9.K6YaPNT_3vuXm-wIaQNfFZ_qQuSisY3-QngzPL-lYHU"
+
 export default async function fetchAPI(version: string): Promise<data> {
   const header = {
-    Authorization: import.meta.env.VITE_TOKEN
+    Authorization: VITE_TOKEN
   }
   const result = await fetch(`https://www.abibliadigital.com.br/api/verses/${version}/random`, {headers: header})
   const data = await result.json()
@@ -24,7 +26,7 @@ export default async function fetchAPI(version: string): Promise<data> {
 
 export async function fetchSwitchVersion(abbrev: string, chapter: number, number: number, version: string) {
   const header = {
-    Authorization: import.meta.env.VITE_TOKEN
+    Authorization: VITE_TOKEN
   }
 
   const result = await fetch(`https://www.abibliadigital.com.br/api/verses/${version}/${abbrev}/${chapter}/${number}`, {headers: header})
