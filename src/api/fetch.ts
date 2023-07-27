@@ -7,7 +7,6 @@ interface data {
 }
 
 const VITE_TOKEN = `${import.meta.env.VITE_TOKEN}`
-console.log(VITE_TOKEN)
 
 export default async function fetchAPI(version: string): Promise<data> {
   const header = {
