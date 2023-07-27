@@ -6,7 +6,8 @@ interface data {
   abbrev: string
 }
 
-const VITE_TOKEN = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlRodSBKdWwgMjAgMjAyMyAxNjo0ODo1OSBHTVQrMDAwMC42NGI4MWMwZmJkMTI5YzAwMjAxYTM1MjUiLCJpYXQiOjE2ODk4NzE3Mzl9.K6YaPNT_3vuXm-wIaQNfFZ_qQuSisY3-QngzPL-lYHU"
+const VITE_TOKEN = `${import.meta.env.VITE_TOKEN}`
+console.log(VITE_TOKEN)
 
 export default async function fetchAPI(version: string): Promise<data> {
   const header = {
